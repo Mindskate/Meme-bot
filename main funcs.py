@@ -19,6 +19,18 @@ def get_json_from_url(url):
 
 def get_updates():
     url = URL + "getUpdates"
-    js = get_json_from_url(url)
-    return js
+    update_js = get_json_from_url(url)
+    return update_js
 
+
+def get_last_chat_id_and_text(updates):
+    num_updates = len(updates["result"])
+    last_update = (num_updates - 1)
+    text = updates["result"][last_update]["message"]["text"]
+    chat_id = updates["result"][last_update]["message"]["chat"]["id"]
+    return (text, chat_id)
+
+def send_message(text, chat_id):
+    url = URL + "sendMessage?text={}&chat_id={}".format(input_text(), input_chatid() )
+    get_url(url)
+    
